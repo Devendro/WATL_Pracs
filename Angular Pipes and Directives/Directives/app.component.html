@@ -1,0 +1,24 @@
+<!-- src/app/app.component.html -->
+
+<!-- *ngIf Directive -->
+
+<div *ngIf="showElement">This element is conditionally displayed.</div>
+
+<!-- *ngFor Directive -->
+
+<ul>
+  <li *ngFor="let item of items">
+    {{ item }}
+  </li>
+</ul>
+
+<!-- [ngStyle] Directive -->
+
+<div
+  [ngStyle]="{
+    color: isRed ? 'red' : 'blue',
+    'font-weight': isBold ? 'bold' : 'normal'
+  }"
+>
+  Dynamic Style
+</div>
