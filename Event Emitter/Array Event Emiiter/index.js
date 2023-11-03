@@ -2,32 +2,29 @@
 
 // Run this file
 
-const EventEmitter = require('events');
+const { eventEmitter, sortArray, reverseArray, searchArray } = require('./eventEmitter');
 
-// Create an instance of the EventEmitter class
-const eventEmitter = new EventEmitter();
+const numbers = [4, 2, 8, 1, 6, 3, 7, 5];
 
-// Function to sort an array
-function sortArray(arr) {
-  const sortedArr = arr.slice().sort((a, b) => a - b);
-  eventEmitter.emit('sorted', sortedArr);
-}
+// Register event handlers
+eventEmitter.on('sorted', (sortedArr) => {
+  console.log('Sorted Array:', sortedArr);
+});
 
-// Function to reverse an array
-function reverseArray(arr) {
-  const reversedArr = arr.slice().reverse();
-  eventEmitter.emit('reversed', reversedArr);
-}
+eventEmitter.on('reversed', (reversedArr) => {
+  console.log('Reversed Array:', reversedArr);
+});
 
-// Function to search for an element in an array
-function searchArray(arr, element) {
-  const index = arr.indexOf(element);
-  eventEmitter.emit('found', index);
-}
+eventEmitter.on('found', (index) => {
+  if (index !== -1) {
+    console.log(`Element found at index ${index}`);
+  } else {
+    console.log('Element not found in the array');
+  }
+});
 
-module.exports = {
-  eventEmitter,
-  sortArray,
-  reverseArray,
-  searchArray,
-};
+// Trigger the functions using events
+sortArray(numbers);
+reverseArray(numbers);
+searchArray(numbers, 7);
+searchArray(numbers, 9);
